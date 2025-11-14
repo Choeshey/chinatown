@@ -89,6 +89,7 @@ export default function ChinaTownRestaurant() {
 
     return (
         <div className="bg-black text-white">
+            {/*// Header Navbar*/}
             <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/95 backdrop-blur-md py-4' : 'bg-transparent py-6'}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center">
@@ -119,10 +120,10 @@ export default function ChinaTownRestaurant() {
                     )}
                 </div>
             </nav>
-
-            <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+            {/*//Hero section*/}
+            <section id="home" className="relative h-screen  flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black z-10"></div>
-                <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=1200" alt="Chinese food" className="absolute inset-0 w-full h-full object-cover" />
+                <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=1200" alt="Chinese food" className="absolute inset-0 w-full h-[600px] object-cover" />
                 <div className="relative z-20 text-center px-4">
                     <div className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-red-500 via-yellow-500 to-red-500 bg-clip-text text-transparent">China Town</div>
                     <div className="text-xl md:text-3xl mb-4 text-yellow-400 font-light">Restaurant</div>
@@ -145,7 +146,7 @@ export default function ChinaTownRestaurant() {
                     </div>
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         <div className="relative">
-                            <img src="https://images.unsplash.com/photo-1562007908-17c67e878c88?w=600" alt="Restaurant interior" className="rounded-lg shadow-2xl" />
+                            <img src="https://images.unsplash.com/photo-1562007908-17c67e878c88?w=600" alt="Restaurant interior"  className="rounded-lg shadow-2xl w-full h-96 object-cover" />
                             <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-red-600 to-yellow-500 rounded-lg -z-10"></div>
                         </div>
                         <div className="space-y-6">
@@ -374,7 +375,7 @@ export default function ChinaTownRestaurant() {
                         </div>
                     </div>
                     <div className="border-t border-gray-800 pt-8 text-center">
-                        <p className="text-gray-400 text-sm">&copy; 2024 China Town Restaurant. All rights reserved.</p>
+                        <p className="text-gray-400 text-sm">&copy; 2025 China Town Restaurant. All rights reserved.</p>
                         <p className="text-gray-500 text-xs mt-2">Designed with passion for authentic Chinese cuisine</p>
                     </div>
                 </div>
