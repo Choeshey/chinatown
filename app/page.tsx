@@ -9,6 +9,14 @@ export default function ChinaTownRestaurant() {
     const [scrolled, setScrolled] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [currentTestimonial, setCurrentTestimonial] = useState(0);
+    const [selectedImage, setSelectedImage] = useState<{
+        img: string;
+        description: string;
+        isGallery?: boolean;
+        name?: string;
+        price?: string;
+        category?: string;
+    } | null>(null);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -55,8 +63,8 @@ export default function ChinaTownRestaurant() {
         { name: 'Sweet Sour Pork', category: 'Main Course', price: '$15.99', desc: 'Tender pork in tangy sauce', image: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400' },
         { name: 'Hot Sour Soup', category: 'Soups', price: '$6.99', desc: 'Traditional spicy soup', image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=400' },
         { name: 'Fried Rice', category: 'Main Course', price: '$11.99', desc: 'Classic Yangzhou fried rice', image: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=400' },
-        { name: 'Mango Pudding', category: 'Desserts', price: '$5.99', desc: 'Silky smooth mango dessert', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400' },
-        { name: 'Jasmine Tea', category: 'Drinks', price: '$3.99', desc: 'Fragrant traditional tea', image: 'https://images.unsplash.com/photo-1564890369478-c89ca6d9cda9?w=400' }
+        { name: 'Mango Pudding', category: 'Desserts', price: '$5.99', desc: 'Silky smooth mango dessert', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400' }
+
     ];
 
     const categories = ['All', 'Starters', 'Main Course', 'Dim Sum', 'Soups', 'Desserts', 'Drinks'];
@@ -137,7 +145,7 @@ export default function ChinaTownRestaurant() {
                     <ChevronDown size={32} className="text-yellow-500" />
                 </div>
             </section>
-
+    {/*//About us*/}
             <section id="about" className="py-20 bg-gradient-to-b from-black to-gray-900">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
@@ -162,6 +170,8 @@ export default function ChinaTownRestaurant() {
                 </div>
             </section>
 
+            {/*//Menu section*/}
+
             <section id="menu" className="py-20 bg-gray-900">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
@@ -178,11 +188,24 @@ export default function ChinaTownRestaurant() {
 
                     <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {filteredMenu.map((item, idx) => (
-                            <div key={idx} className="group bg-gray-800 rounded-lg overflow-hidden hover:shadow-2xl hover:shadow-red-500/20 transition-all duration-300 transform hover:-translate-y-2">
+                            <div 
+                                key={idx} 
+                                className="group bg-gray-800 rounded-lg overflow-hidden hover:shadow-2xl hover:shadow-red-500/20 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
+                                onClick={() => setSelectedImage({ 
+                                    img: item.image, 
+                                    description: item.desc,
+                                    name: item.name,
+                                    price: item.price,
+                                    category: item.category
+                                })}
+                            >
                                 <div className="relative overflow-hidden h-48">
                                     <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                                        <p className="text-sm text-gray-300">{item.desc}</p>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                                        <p className="text-sm text-gray-300 mb-2">{item.desc}</p>
+                                        <button className="bg-red-600 text-white text-sm py-1 px-3 rounded-full w-fit hover:bg-red-700 transition-colors">
+                                            View Details
+                                        </button>
                                     </div>
                                 </div>
                                 <div className="p-4">
@@ -201,7 +224,7 @@ export default function ChinaTownRestaurant() {
                     </div>
                 </div>
             </section>
-
+            {/*//Testimonials section*/}
             <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
@@ -225,8 +248,8 @@ export default function ChinaTownRestaurant() {
                     </div>
                 </div>
             </section>
-
-            <section id="gallery" className="py-20 bg-black">
+            {/*//Gallery Section*/}
+            <section id="gallery" className="py-20 bg-black relative">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
                         <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">Gallery</h2>
@@ -236,13 +259,80 @@ export default function ChinaTownRestaurant() {
 
                     <div className="grid md:grid-cols-3 gap-4">
                         {galleryImages.map((img, idx) => (
-                            <div key={idx} className="relative overflow-hidden rounded-lg group cursor-pointer h-64">
-                                <img src={img} alt={`Gallery ${idx + 1}`} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div 
+                                key={idx} 
+                                className="relative overflow-hidden rounded-lg group cursor-pointer h-64"
+                                onClick={() => setSelectedImage({ 
+                                    img, 
+                                    description: `Image ${idx + 1} of our gallery`,
+                                    isGallery: true
+                                })}
+                            >
+                                <img 
+                                    src={img} 
+                                    alt={`Gallery ${idx + 1}`} 
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                    <p className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        Click to view
+                                    </p>
+                                </div>
                             </div>
                         ))}
                     </div>
                 </div>
+
+                {/* Image Modal */}
+                {selectedImage && (
+                    <div 
+                        className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 cursor-zoom-out"
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        <div className="relative max-w-5xl w-full max-h-[90vh]" onClick={e => e.stopPropagation()}>
+                            <button 
+                                onClick={() => setSelectedImage(null)}
+                                className="absolute -top-10 right-0 text-white hover:text-yellow-400 transition-colors"
+                                aria-label="Close"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                            
+                            {selectedImage.isGallery ? (
+                                <div className="flex flex-col items-center">
+                                    <img 
+                                        src={selectedImage.img} 
+                                        alt="Gallery view" 
+                                        className="max-w-full max-h-[80vh] object-contain"
+                                    />
+                                    {selectedImage.description && (
+                                        <p className="mt-4 text-white text-center text-lg">
+                                            {selectedImage.description}
+                                        </p>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className="relative">
+                                    <img 
+                                        src={selectedImage.img} 
+                                        alt={selectedImage.name || 'Menu item'} 
+                                        className="w-full max-h-[80vh] object-contain"
+                                    />
+                                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-yellow-500 text-2xl font-bold">{selectedImage.price}</span>
+                                            <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-full transition-colors">
+                                                Order Now
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )}
             </section>
 
             <section id="reservation" className="py-20 bg-gradient-to-b from-black to-gray-900">
