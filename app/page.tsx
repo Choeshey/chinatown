@@ -321,7 +321,7 @@ export default function ChinaTownRestaurant() {
                                         className="w-full max-h-[80vh] object-contain"
                                     />
                                     <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
-                                        <div className="flex justify-between items-center">
+                                        <div className="flex justify-between items-center justify-center gap-6">
                                             <span className="text-yellow-500 text-2xl font-bold">{selectedImage.price}</span>
                                             <button className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-full transition-colors">
                                                 Order Now
